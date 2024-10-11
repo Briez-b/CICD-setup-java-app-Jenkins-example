@@ -63,7 +63,7 @@ pipeline {
                     git config user.email "zhenyabrishtenpl@gmail.com"
                     git config user.name "Yauheni Bryshten"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/$((BUILD_NUMBER - 1))/${BUILD_NUMBER}/g" deployment.yml
+                    sed -i "s|\(ebryyau/ultimate-cicd:\)[0-9]\+|\1${BUILD_NUMBER}|g" deployment.yml
                     git add deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
