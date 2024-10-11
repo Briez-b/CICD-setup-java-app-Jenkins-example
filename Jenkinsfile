@@ -57,6 +57,7 @@ pipeline {
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
+                    rm -rf CICD-setup-java-app-manifests
                     git clone https://github.com/Briez-b/CICD-setup-java-app-manifests.git
                     cd CICD-setup-java-app-manifests
                     git config user.email "zhenyabrishtenpl@gmail.com"
