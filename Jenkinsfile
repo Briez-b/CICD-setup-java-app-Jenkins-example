@@ -46,6 +46,7 @@ pipeline {
             docker.withRegistry('https://index.docker.io/v1/', "docker-credentials") {
                 dockerImage.push()
             }
+            sh 'docker rmi ${DOCKER_IMAGE}'
         }
       }
     }
