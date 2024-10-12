@@ -1,20 +1,20 @@
 # Repository with the complete CI/CD setup project(Jenkins, ArgoCD).
 
-## Bellow my notes with everything I did to create this setup.  
+Bellow my notes with everything I did to create this setup.  
+<br>
+<br>  
+<br>
+<br>
 
-  
 
-
-
-
-**This is one of the complete CI/CD setup used in real life (or something similar).**
+## This is one of the complete CI/CD setup used in real life (or something similar) I am gonna creating.
 
 ![](https://github.com/Briez-b/DevOpsNotes/blob/main/Attachments/Pasted%20image%2020241011084321.png)
 
 # Let's try to understand every component of this setup
 
-#### 1) **(Source Code)**. We have a git repository with our code that should be tested and deployed. The code is some Java application.
-#### 2) **(JENKINS)**. He is connected to the git repository and whenever pull-request triggered (it can be configured on different action), JENKINS pipeline will be triggered. 
+1) **(Source Code)**. We have a git repository with our code that should be tested and deployed. The code is some Java application.
+2) **(JENKINS)**. He is connected to the git repository and whenever pull-request triggered (it can be configured on different action), JENKINS pipeline will be triggered. 
 
 
 >[!info] In Jenkins, there are two main types of pipelines for automating CI/CD processes.
@@ -29,15 +29,18 @@ We specify what set of actions should be done with code by writing Jenkins pipel
 - **(SonarQube).** We do the code quality check using such tools like SonarQube. It performs static code analysis to detect bugs, code smells, security vulnerabilities, and potential technical debt.  
 - **(TESTS)**. Run  tests. Usually we have some tests written for our applicatiom. It can be unit tests, system tests and so on. 
 - We create new Docker image with this application and push it to Docker hub to use it later in CD process.
-#### 3) **(Image updater)**. It continuously monitor container image registry (Docker hub in our case) and whenever new image pushed there, it updates Manifests Repo deployments manifests files (put there a new image).
+
+3) **(Image updater)**. It continuously monitor container image registry (Docker hub in our case) and whenever new image pushed there, it updates Manifests Repo deployments manifests files (put there a new image).
 
 >[!info] We can also use some bash/ansible/python script instead of Image updater.
-#### 4) **(Manifests Repo)**. We have another Git repository with manifest yaml files to deploy our application. 
-#### 5) **(ARGO CD)**. It continuously watches Manifest Repo and whenever new changes is there, it takes .yaml manifests and use it to deploy application to our kubernetes cluster.
+
+4) **(Manifests Repo)**. We have another Git repository with manifest yaml files to deploy our application. 
+
+5) **(ARGO CD)**. It continuously watches Manifest Repo and whenever new changes is there, it takes .yaml manifests and use it to deploy application to our kubernetes cluster.
 >[!info] ARGO CD and Argo image updater are ones of the GitOps tools. 
 >**GitOps** is a modern approach to managing infrastructure and application deployments using Git as the single source of truth. It applies the principles of DevOps to infrastructure automation, focusing on continuous delivery and infrastructure-as-code (IaC). In GitOps, all changes to infrastructure, environments, and applications are made through pull requests in a Git repository, and automation ensures that the desired state defined in Git is always reflected in the actual state of the system.
 
-#### 6) **(Kubernetes cluster)**. This is where we deploy our code. There we install Argo Image updater and ARGO CD to allow them deploying new software to this cluster. 
+6) **(Kubernetes cluster)**. This is where we deploy our code. There we install Argo Image updater and ARGO CD to allow them deploying new software to this cluster. 
 
 ---
 # Let's create a real setup
