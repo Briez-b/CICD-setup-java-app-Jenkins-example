@@ -36,6 +36,7 @@ pipeline {
       environment {
         DOCKER_IMAGE = "ebryyau/ultimate-cicd:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
+        // Created 'docker-credentials' secret in Jenkins.
         REGISTRY_CREDENTIALS = credentials('docker-credentials')
       }
       steps {
@@ -55,6 +56,7 @@ pipeline {
             GIT_USER_NAME = "Briez-b"
         }
         steps {
+            //generated this token github and added as secret 'github' in Jenkins
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
                     rm -rf CICD-setup-java-app-manifests
