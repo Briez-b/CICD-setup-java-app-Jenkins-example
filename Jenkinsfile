@@ -23,7 +23,7 @@ pipeline {
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://3.74.228.105:9000"
+        SONAR_URL = "${SONAR_URL}"
       }
       steps {
         // Here we use token we saved previously to the secret in Jenkins
